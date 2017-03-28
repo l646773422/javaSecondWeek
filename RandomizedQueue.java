@@ -15,6 +15,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
         private Node iter = tail;
         public Item next()
         {
+            if(iter == null) throw new java.util.NoSuchElementException("queue is empty");
             Item item = iter.item;
             iter = iter.next;
             return item;
@@ -43,6 +44,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
     }
     public void enqueue(Item item)           // add the item
     {
+        if ( item == null )throw new java.lang.NullPointerException();
         Node temp = new Node();
         temp.item = item;
         temp.next = tail;
@@ -51,6 +53,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
     }
     public Item dequeue()                    // remove and return a random item
     {
+        if( isEmpty() ) throw new java.util.NoSuchElementException("queue is empty");
         StdRandom.setSeed(System.currentTimeMillis());
         int pos = StdRandom.uniform(0, queSize);
         Node temp, iter;
@@ -76,6 +79,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
     }
     public Item sample()                     // return (but do not remove) a random item
     {
+        if( isEmpty() ) throw new java.util.NoSuchElementException("queue is empty");
         int pos = StdRandom.uniform(0, queSize);
         Node iter = tail;
         for(int i=0; i<pos; i++)
