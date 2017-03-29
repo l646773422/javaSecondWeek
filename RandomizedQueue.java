@@ -2,8 +2,8 @@ import java.util.Iterator;
 import edu.princeton.cs.algs4.StdRandom;
 public class RandomizedQueue<Item> implements Iterable<Item> 
 {
-    int queSize;
-    Node tail;
+    private int queSize;
+    private Node tail;
     private class Node
     {
         Item item;
@@ -13,6 +13,10 @@ public class RandomizedQueue<Item> implements Iterable<Item>
     private class RandomizedQueueIterator implements Iterator<Item>
     {
         private Node iter = tail;
+        RandomizedQueueIterator()
+        {
+            // to init queSize of iters and random output them
+        }
         public Item next()
         {
             if(iter == null) throw new java.util.NoSuchElementException("queue is empty");
@@ -26,7 +30,8 @@ public class RandomizedQueue<Item> implements Iterable<Item>
         }
         public boolean hasNext()
         {
-            return iter.next != null;
+            if(queSize==0) return false;
+            return  (iter != null);
         }
     }
     public RandomizedQueue()                 // construct an empty randomized queue
@@ -54,7 +59,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
     public Item dequeue()                    // remove and return a random item
     {
         if( isEmpty() ) throw new java.util.NoSuchElementException("queue is empty");
-        StdRandom.setSeed(System.currentTimeMillis());
+//        StdRandom.setSeed(System.currentTimeMillis());
         int pos = StdRandom.uniform(0, queSize);
         Node temp, iter;
         Item item;
@@ -62,6 +67,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
         {
             item = tail.item;
             tail = tail.next;
+            queSize--;
             return item;
         }
         temp = tail;
@@ -73,7 +79,7 @@ public class RandomizedQueue<Item> implements Iterable<Item>
         }
         item = iter.item;
         temp.next = iter.next;
-        iter = null;
+//        iter = null;
         queSize--;
         return item;
     }
@@ -92,24 +98,15 @@ public class RandomizedQueue<Item> implements Iterable<Item>
     }
     public static void main(String[] args)   // unit testing (optional)
     {
+//        RandomizedQueue<String> ranque = new RandomizedQueue<String>();
         RandomizedQueue<Integer> ranque = new RandomizedQueue<Integer>();
-        System.out.println("0size" + ranque.size());
-        ranque.enqueue(15);
-        System.out.println("1size" + ranque.size());
-        ranque.enqueue(16);
-        System.out.println("2size" + ranque.size());
-        ranque.enqueue(17);
-        System.out.println("3size" + ranque.size());
-        ranque.enqueue(18);
-        System.out.println("4size" + ranque.size());
-        ranque.enqueue(5);
-        System.out.println("5size" + ranque.size());
-        ranque.enqueue(8);
-        System.out.println("6size" + ranque.size());
-        ranque.enqueue(35);
-        System.out.println("7size" + ranque.size());
+        
+            ranque.enqueue(1);
+            ranque.enqueue(2);
+            ranque.enqueue(3);
+            ranque.enqueue(4);
         
         for(int i: ranque)
-            System.out.println(i);
+            System.out.printf("%3d",i);
     }
 }

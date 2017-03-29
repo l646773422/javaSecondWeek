@@ -13,12 +13,12 @@ public class Deque<Item> implements Iterable<Item>
     
     private class DequeIterator implements Iterator<Item>
     {
-        private Node iter = tail;
+        private Node iter = head;
         public Item next()
         {
             if ( !hasNext() ) throw new java.util.NoSuchElementException();
             Item temp = iter.item;
-            iter = iter.next;
+            iter = iter.front;
             return temp;
             
         }
@@ -28,7 +28,7 @@ public class Deque<Item> implements Iterable<Item>
         }
         public boolean hasNext()
         {
-            return iter!=head;
+            return iter!=null;
         }
     }
     
@@ -123,17 +123,11 @@ public class Deque<Item> implements Iterable<Item>
     public static void main(String[] args)   // unit testing (optional)
     {
         Deque<Integer> que = new Deque<Integer>();
-        System.out.println("0size" + que.size());
-        que.addFirst(17);
-        System.out.println("1size" + que.size());
-        que.addFirst(18);
-        System.out.println("2size" + que.size());
-        que.addFirst(19);
-        System.out.println("3size" + que.size());
-        que.addLast(20);
-        System.out.println("4size" + que.size());
-        que.addLast(21);
-        
+        for(int i=0; i<10; i++)
+            que.addFirst(i);
+        que.addFirst(1);
+        que.addLast(2);
+        System.out.println("size is : " + que.size());
         for(int res: que)
             System.out.printf("%3d", res);
         System.out.printf("\n");
