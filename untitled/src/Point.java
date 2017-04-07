@@ -5,18 +5,17 @@ public class Point implements Comparable<Point>
 {
     private int m_x, m_y;
     private Point m_point;
+    public void test()
+    {
+        m_x = 0;
+    }
     private class slopeComparator implements Comparator<Point>
     {
         public int compare( Point p1, Point p2)
         {
             // m_point some question
-            int temp1 = (int)m_point.slopeTo(p1);
-            int temp2 = (int)m_point.slopeTo(p2);
-            if(temp1 > temp2)
-                System.out.println("get in");
-            else 
-                System.out.println("get out");
-            return (int)( m_point.slopeTo(p1) - m_point.slopeTo(p2) );
+            double result = m_point.slopeTo(p1) - m_point.slopeTo(p2);
+            return result < 0 ? -1 : result > 0 ? 1 : 0 ;
         }
     }
     
@@ -74,40 +73,41 @@ public class Point implements Comparable<Point>
         Point[] temp = new Point[3];
         points[0] = new Point(100, 100);
         points[1] = new Point(15000, 1000);
-        points[2] = new Point(4100, 8000);
-        points[3] = new Point(12000, 13000);
+        points[2] = new Point(4100, 9000);
+        points[3] = new Point(12000, 8000);
         
-        temp[0] = new Point(15000, 1000);
-        temp[1] = new Point(4100, 8000);
-        temp[2] = new Point(12000, 13000);
-//        for(int i=0;i<3;i++)
-//        {
-//            temp[i] = points[i+1];
-//        }
-        
-//        Arrays.sort( temp, points[0].slopeOrder() );
-        Arrays.sort( temp);
-        
-        System.out.println();
-        for(int i=0;i<4;i++)
-        System.out.println(points[i].m_point);
-        System.out.println(points[0]);
-        System.out.println();
+//        temp[0] = new Point(15000, 1000);
+//        temp[1] = new Point(4100, 9000);
+//        temp[2] = new Point(12000, 8000);
+        for(int i=0;i<3;i++)
+        {
+            temp[i] = points[i+1];
+        }
+        System.out.println( "temp" );
+        for( int k = 0; k < temp.length; k++ )
+        {
+            System.out.println( temp[k] );
+        }
+        Arrays.sort( temp, points[0].slopeOrder() );
+//        Arrays.sort( temp);
         
         StdDraw.setPenColor(StdDraw.BLACK);
         StdDraw.enableDoubleBuffering();
         StdDraw.setXscale(0, 32768);
         StdDraw.setYscale(0, 32768);
-//        for( int k = 0; k < points.length; k++ )
-//        {
-//            System.out.println( points[k] );
-//            points[k].draw();
-//        }
+
+        System.out.println( "temp" );
         for( int k = 0; k < temp.length; k++ )
         {
             System.out.println( temp[k] );
             temp[k].draw();
         }
+        System.out.println( "Points" );
+        for( int k = 0; k < points.length; k++ )
+        {
+            System.out.println( points[k] );
+        }
+
         StdDraw.show();
     }
 }
