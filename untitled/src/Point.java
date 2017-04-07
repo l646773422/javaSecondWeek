@@ -42,15 +42,11 @@ public class Point implements Comparable<Point>
     }
     public String toString()                           // string representation
     {
-        return "" + m_x + ", " + m_y;
+        return " " + m_x + ", " + m_y + " ";
     }
 
     public int compareTo(Point that)                   // compare two points by y-coordinates, breaking ties by x-coordinates
     {
-        if(m_y < that.m_y)
-            System.out.println("get in");
-        else 
-            System.out.println("get out");
         if ( m_y < that.m_y ) return -1;
         if ( m_y > that.m_y ) return  1;
         if ( m_x < that.m_x ) return -1;
